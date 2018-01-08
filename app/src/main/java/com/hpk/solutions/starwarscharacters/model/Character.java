@@ -8,9 +8,9 @@ public class Character {
 
     private String name;
 
-    private int height;
+    private String height;
 
-    private int mass;
+    private String mass;
 
     private String hairColor;
 
@@ -28,19 +28,19 @@ public class Character {
         this.name = name;
     }
 
-    public int getHeight() {
+    public String getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(String height) {
         this.height = height;
     }
 
-    public int getMass() {
+    public String getMass() {
         return mass;
     }
 
-    public void setMass(int mass) {
+    public void setMass(String mass) {
         this.mass = mass;
     }
 
