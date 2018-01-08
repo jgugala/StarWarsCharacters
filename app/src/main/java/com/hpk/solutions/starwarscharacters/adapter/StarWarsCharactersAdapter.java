@@ -16,14 +16,15 @@ public class StarWarsCharactersAdapter extends RecyclerView.Adapter<StarWarsChar
 
     public interface OnItemClickListener {
         void onItemClick(View view, Character item, int position);
-
     }
 
     private List<Character> characters;
 
     private OnItemClickListener onItemClickListener;
 
-    public StarWarsCharactersAdapter(List<Character> characters){}
+    public StarWarsCharactersAdapter(List<Character> characters){
+        this.characters = characters;
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
