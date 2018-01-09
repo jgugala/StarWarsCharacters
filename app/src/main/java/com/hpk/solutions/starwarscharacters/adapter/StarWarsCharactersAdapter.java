@@ -1,10 +1,15 @@
 package com.hpk.solutions.starwarscharacters.adapter;
 
+import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.hpk.solutions.starwarscharacters.R;
+import com.hpk.solutions.starwarscharacters.databinding.ItemStarWarsCharactersListBinding;
 import com.hpk.solutions.starwarscharacters.model.Character;
+import com.hpk.solutions.starwarscharacters.view.StarWarsCharactersListItemViewModel;
 
 import java.util.List;
 
@@ -26,25 +31,51 @@ public class StarWarsCharactersAdapter extends RecyclerView.Adapter<StarWarsChar
         this.characters = characters;
     }
 
-    @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        final  ItemStarWarsCharactersListBinding binding = DataBindingUtil.inflate(
+                inflater, R.layout.item_star_wars_characters_list, parent, false
+        );
+        return new StarWarsCharactersAdapter.ViewHolder(binding);
+    }
 
+    @Override
+    public void onBindViewHolder(ViewHolder holder, final int position) {
+        final  Character character = characters.get(position);
+        final StarWarsCharactersListItemViewModel itemViewModel =
+                new StarWarsCharactersListItemViewModel(character);
+
+        holder.binding.getRoot().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickListener.onItemClick(v, character, position);
+            }
+        });
+        holder.bind(itemViewModel);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return characters.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public ViewHolder(View itemView) {
-            super(itemView);
+        private ItemStarWarsCharactersListBinding binding;
+
+        ViewHolder(ItemStarWarsCharactersListBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
+
+        void bind(StarWarsCharactersListItemViewModel itemViewModel) {
+            binding.setStarWarsCharactersListItemViewModel(itemViewModel);
+            binding.executePendingBindings();
         }
     }
 }
