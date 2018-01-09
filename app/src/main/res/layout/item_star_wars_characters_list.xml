@@ -2,19 +2,15 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-
-        <import type="android.view.View" />
-
         <variable
-            name="shortGradingListItemViewModel"
+            name="starWarsCharactersListItemViewModel"
             type="com.hpk.solutions.starwarscharacters.view.StarWarsCharactersListItemViewModel" />
     </data>
 
     <TextView
         android:id="@+id/name"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="@{shortGradingListItemViewModel.name}" />
+        android:text="@{starWarsCharactersListItemViewModel.name}" />
 
 </layout>
