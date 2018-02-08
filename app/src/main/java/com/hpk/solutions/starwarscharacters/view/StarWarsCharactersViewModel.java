@@ -7,6 +7,8 @@ import com.hpk.solutions.starwarscharacters.model.Character;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import javax.inject.Inject;
+
 /**
  * Created by jgugala on 2018-01-08.
  */
@@ -783,7 +785,8 @@ public class StarWarsCharactersViewModel {
             "]";
 
 
-    StarWarsCharactersViewModel() {
+    @Inject
+    public StarWarsCharactersViewModel() {
     }
 
     List<Character> getCharacters() {
