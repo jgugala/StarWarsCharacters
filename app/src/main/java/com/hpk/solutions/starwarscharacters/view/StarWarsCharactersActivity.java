@@ -9,13 +9,19 @@ import android.view.View;
 import com.hpk.solutions.starwarscharacters.R;
 import com.hpk.solutions.starwarscharacters.adapter.StarWarsCharactersAdapter;
 import com.hpk.solutions.starwarscharacters.databinding.ActivityStarWarsCharactersBinding;
+import com.hpk.solutions.starwarscharacters.di.components.ActivityComponent;
+import com.hpk.solutions.starwarscharacters.di.components.DaggerActivityComponent;
+import com.hpk.solutions.starwarscharacters.di.modules.ActivityModule;
 import com.hpk.solutions.starwarscharacters.model.Character;
+
+import javax.inject.Inject;
 
 public class StarWarsCharactersActivity extends AppCompatActivity implements StarWarsCharactersAdapter.OnItemClickListener {
 
     private StarWarsCharactersAdapter adapter;
 
-    private StarWarsCharactersViewModel viewModel;
+    @Inject
+    StarWarsCharactersViewModel viewModel;
 
     private ActivityStarWarsCharactersBinding binding;
 
@@ -23,7 +29,10 @@ public class StarWarsCharactersActivity extends AppCompatActivity implements Sta
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_star_wars_characters);
-        viewModel = new StarWarsCharactersViewModel();
+
+        DaggerActivityComponent.builder()
+                .build()
+                .inject(this);
     }
 
     @Override
