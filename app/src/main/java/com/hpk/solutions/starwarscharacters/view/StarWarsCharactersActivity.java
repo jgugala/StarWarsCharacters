@@ -1,20 +1,19 @@
 package com.hpk.solutions.starwarscharacters.view;
 
 import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
 import com.hpk.solutions.starwarscharacters.R;
 import com.hpk.solutions.starwarscharacters.adapter.StarWarsCharactersAdapter;
 import com.hpk.solutions.starwarscharacters.databinding.ActivityStarWarsCharactersBinding;
-import com.hpk.solutions.starwarscharacters.di.components.ActivityComponent;
-import com.hpk.solutions.starwarscharacters.di.components.DaggerActivityComponent;
-import com.hpk.solutions.starwarscharacters.di.modules.ActivityModule;
 import com.hpk.solutions.starwarscharacters.model.Character;
 
 import javax.inject.Inject;
+
+import dagger.android.AndroidInjection;
 
 public class StarWarsCharactersActivity extends AppCompatActivity implements StarWarsCharactersAdapter.OnItemClickListener {
 
@@ -27,12 +26,9 @@ public class StarWarsCharactersActivity extends AppCompatActivity implements Sta
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_star_wars_characters);
-
-        DaggerActivityComponent.builder()
-                .build()
-                .inject(this);
     }
 
     @Override
